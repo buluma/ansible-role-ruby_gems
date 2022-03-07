@@ -28,7 +28,7 @@
         - ansible_distribution_major_version == '7'
 
   roles:
-    - role: geerlingguy.ruby
+    - role: buluma.ruby_gems
 
   post_tasks:
     - name: Verify Ruby is installed.

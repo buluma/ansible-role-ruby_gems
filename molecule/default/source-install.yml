@@ -15,7 +15,7 @@
       when: ansible_os_family == 'Debian'
 
   roles:
-    - role: geerlingguy.ruby
+    - role: buluma.ruby_gems
 
   post_tasks:
     - name: Verify Ruby is installed.

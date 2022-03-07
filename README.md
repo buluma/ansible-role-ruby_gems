@@ -1,6 +1,6 @@
 # Ansible Role: Ruby
 
-[![CI](https://github.com/geerlingguy/ansible-role-ruby/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-ruby/actions?query=workflow%3ACI)
+[![CI](https://github.com/buluma/ansible-role-ruby_gems/workflows/CI/badge.svg?event=push)](https://github.com/buluma/ansible-role-ruby_gems/actions?query=workflow%3ACI)
 
 Installs Ruby and bundler gem on Linux.
 
@@ -56,7 +56,7 @@ None.
 
     - hosts: server
       roles:
-        - role: geerlingguy.ruby
+        - role: buluma.ruby_gems
 
 ## License
 
@@ -64,4 +64,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This role was created in 2022 by [Michael Buluma](https://github.buluma.io/).
