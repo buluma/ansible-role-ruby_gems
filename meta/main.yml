@@ -2,7 +2,7 @@
 dependencies: []
 
 galaxy_info:
-  role_name: ruby
+  role_name: ruby_gems
   author: buluma
   description: Ruby installation for Linux.
   license: "license (BSD, MIT)"

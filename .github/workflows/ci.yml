@@ -8,6 +8,10 @@ name: CI
   schedule:
     - cron: "0 3 * * 4"
 
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
 defaults:
   run:
     working-directory: 'geerlingguy.ruby'
