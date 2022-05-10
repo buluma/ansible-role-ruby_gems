@@ -19,7 +19,9 @@ galaxy_info:
         - all
     - name: Ubuntu
       versions:
-        - all
+        - bionic
+        - focal
+        - latest
     - name: Debian
       versions:
         - all
