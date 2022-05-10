@@ -5,37 +5,19 @@ galaxy_info:
   role_name: ruby_gems
   author: buluma
   description: Ruby installation for Linux.
-  license: "license (BSD, MIT)"
+  license: "license (Apache-2.0)"
   min_ansible_version: 2.4
   platforms:
     - name: EL
       versions:
         - all
-    - name: GenericUNIX
-      versions:
-        - all
     - name: Fedora
       versions:
         - all
-    - name: opensuse
-      versions:
-        - all
-    - name: GenericBSD
-      versions:
-        - all
-    - name: FreeBSD
+    - name: OpenSUSE
       versions:
         - all
     - name: Ubuntu
-      versions:
-        - lucid
-        - trusty
-        - precise
-        - bionic
-    - name: SLES
-      versions:
-        - all
-    - name: GenericLinux
       versions:
         - all
     - name: Debian

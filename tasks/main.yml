@@ -1,9 +1,9 @@
 ---
-- name: Include OS-specific variables.
+- name: include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Define ruby_packages.
-  set_fact:
+- name: define ruby_packages.
+  ansible.builtin.set_fact:
     ruby_packages: "{{ __ruby_packages }}"
   when: ruby_packages is not defined
 
@@ -22,19 +22,19 @@
 - include_tasks: install-from-source.yml
   when: ruby_install_from_source
 
-- name: Add user installed RubyGems bin directory to global $PATH.
-  copy:
+- name: add user installed RubyGems bin directory to global $PATH.
+  ansible.builtin.copy:
     src: rubygems.sh
     dest: /etc/profile.d/rubygems.sh
     mode: 0644
 
 # Install Bundler and configured gems.
-- name: Install Bundler.
+- name: install Bundler.
   gem: name=bundler state=present user_install=no
   when: ruby_install_bundler
 
-- name: Install configured gems.
-  gem:
+- name: install configured gems.
+  community.general.gem:
     name: "{{ item }}"
     state: present
   become: true
