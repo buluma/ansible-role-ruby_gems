@@ -1,51 +1,51 @@
 ---
-- name: Define ruby_build_packages.
-  set_fact:
+- name: define ruby_build_packages.
+  ansible.builtin.set_fact:
     ruby_build_packages: "{{ __ruby_build_packages }}"
   when: ruby_build_packages is not defined
 
-- name: Install packages required to build ruby.
-  yum:
+- name: install packages required to build ruby.
+  ansible.builtin.yum:
     name: "{{ ruby_build_packages }}"
     state: present
   when: ansible_os_family == 'RedHat'
 
-- name: Update apt cache (Debian).
+- name: update apt cache (Debian).
   apt: update_cache=true cache_valid_time=86400
   when: ansible_os_family == 'Debian'
 
-- name: Install packages required to build ruby (Debian).
-  apt:
+- name: install packages required to build ruby (Debian).
+  ansible.builtin.apt:
     name: "{{ ruby_build_packages }}"
     state: present
   when: ansible_os_family == 'Debian'
 
-- name: Ensure that /var/cache/ansible/ exists
-  file:
+- name: ensure that /var/cache/ansible/ exists
+  ansible.builtin.file:
     path: "/var/cache/ansible/"
     state: directory
 
-- name: Check if ruby is up-to-date
-  stat:
+- name: check if ruby is up-to-date
+  ansible.builtin.stat:
     path: "/var/cache/ansible/ruby-{{ ruby_version }}.check"
   register: ruby_version_marker
 
-- name: Download, extract, and install ruby
+- name: download, extract, and install ruby
   when: not ruby_version_marker.stat.exists
   block:
-    - name: Download ruby.
-      get_url:
+    - name: download ruby.
+      ansible.builtin.get_url:
         url: "{{ ruby_download_url }}"
         dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
 
-    - name: Extract ruby.
-      unarchive:
+    - name: extract ruby.
+      ansible.builtin.unarchive:
         src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
         dest: "{{ workspace }}/"
         copy: false
         mode: 0755
 
-    - name: Build ruby.
+    - name: build ruby.
       command: >
         {{ item }}
         chdir={{ workspace }}/ruby-{{ ruby_version }}
@@ -54,12 +54,12 @@
         - make
         - make install
 
-    - name: Touch install-marker
-      file:
+    - name: touch install-marker
+      ansible.builtin.file:
         path: "/var/cache/ansible/ruby-{{ ruby_version }}.check"
         state: touch
 
-- name: Add ruby symlinks.
+- name: add ruby symlinks.
   file:  # noqa 208
     src: "/usr/local/bin/{{ item }}"
     dest: "/usr/bin/{{ item }}"

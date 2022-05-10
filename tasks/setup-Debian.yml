@@ -1,18 +1,18 @@
 ---
-- name: Update apt cache.
+- name: update apt cache.
   apt: update_cache=yes cache_valid_time=86400
 
-- name: Set rubygems package name for Ubuntu 14.04.
-  set_fact:
+- name: set rubygems package name for Ubuntu 14.04.
+  ansible.builtin.set_fact:
     ruby_rubygems_package_name: rubygems-integration
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
 
-- name: Install ruby and other required dependencies.
-  apt:
+- name: install ruby and other required dependencies.
+  ansible.builtin.apt:
     name: "{{ ruby_packages }}"
     state: present
 
-- name: Install rubygems.
-  apt:
+- name: install rubygems.
+  ansible.builtin.apt:
     name: "{{ ruby_rubygems_package_name }}"
     state: present

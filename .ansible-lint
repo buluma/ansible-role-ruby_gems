@@ -1,3 +1,11 @@
+---
+#
+# Ansible managed
+#
+  - ./molecule/default/collections.yml
+  - ./.tox
+  - ./.cache
+
 skip_list:
   - 'yaml'
   - 'role-name'
