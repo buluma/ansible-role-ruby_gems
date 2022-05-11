@@ -11,15 +11,11 @@ galaxy_info:
     - name: EL
       versions:
         - all
-    - name: Fedora
-      versions:
-        - all
-    - name: OpenSUSE
-      versions:
-        - all
     - name: Ubuntu
       versions:
-        - all
+        - bionic
+        - focal
+        - latest
     - name: Debian
       versions:
         - all
