@@ -7,6 +7,7 @@
 **Merged pull requests:**
 
 - Testing [\#4](https://github.com/buluma/ansible-role-ruby_gems/pull/4) ([buluma](https://github.com/buluma))
+- Bump actions/checkout from 2 to 3 [\#3](https://github.com/buluma/ansible-role-ruby_gems/pull/3) ([dependabot[bot]](https://github.com/apps/dependabot))
 - develop [\#1](https://github.com/buluma/ansible-role-ruby_gems/pull/1) ([buluma](https://github.com/buluma))
 
 ## [1.0.3](https://github.com/buluma/ansible-role-ruby_gems/tree/1.0.3) (2022-03-07)
