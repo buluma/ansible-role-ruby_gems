@@ -3,6 +3,6 @@
 # Ansible managed
 #
 repository:
-  description: Ruby installation for Linux.
+  description: Ruby Gems installation for Linux.
   homepage: https://buluma.github.io/
   topics: development, web, ruby, rails, gem, bundler, ansible, molecule, tox, playbook, hacktoberfest

@@ -1,6 +1,6 @@
 # [ruby_gems](#ruby_gems)
 
-Ruby installation for Linux.
+Ruby Gems installation for Linux.
 
 |GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
 |------|------|-------|---------|-------|------|-------------|
@@ -40,6 +40,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
         - ansible_distribution_major_version == '7'
 
   roles:
+    - role: buluma.bootstrap
     - role: buluma.ruby_gems
 
   post_tasks:
@@ -81,6 +82,13 @@ ruby_rubygems_package_name: rubygems
 
 - pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-ruby_gems/blob/main/requirements.txt).
 
+## [Status of used roles](#status-of-requirements)
+
+The following roles are used to prepare a system. You can prepare your system in another way.
+
+| Requirement | GitHub | GitLab |
+|-------------|--------|--------|
+|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-bootstrap/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-bootstrap)|
 
 ## [Context](#context)
 
@@ -96,9 +104,9 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 
 |container|tags|
 |---------|----|
-|el|7|
-|ubuntu|focal, bionic|
-|debian|9|
+|el|all|
+|ubuntu|bionic, focal, latest|
+|debian|all|
 
 The minimum version of Ansible required is 2.4, tests have been done to:
 

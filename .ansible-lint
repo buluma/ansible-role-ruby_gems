@@ -7,9 +7,7 @@ exclude_list:
   - ./.tox
   - ./.cache
 
-skip_list:
-  - 'yaml'
-  - 'role-name'
+skip_list:  # or 'skip_list' to silence them completely
   - experimental  # all rules tagged as experimental
   - fqcn-builtins  # Use FQCN for builtin actions.
   - no-changed-when  # Commands should not change things if nothing needs doing.

@@ -58,6 +58,7 @@
       ansible.builtin.file:
         path: "/var/cache/ansible/ruby-{{ ruby_version }}.check"
         state: touch
+        mode: 0755
 
 - name: add ruby symlinks.
   file:  # noqa 208

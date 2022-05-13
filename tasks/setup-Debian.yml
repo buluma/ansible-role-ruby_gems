@@ -1,6 +1,6 @@
 ---
 - name: update apt cache.
-  apt: update_cache=yes cache_valid_time=86400
+  ansible.builtin.apt: update_cache=yes cache_valid_time=86400
 
 - name: set rubygems package name for Ubuntu 14.04.
   ansible.builtin.set_fact:
