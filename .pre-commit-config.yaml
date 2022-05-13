@@ -21,4 +21,4 @@ repos:
       - id: ansible_role_find_empty_directories
       - id: ansible_role_fix_readability
       - id: ansible_role_find_undefined_handlers
-      # - id: ansible_role_find_unquoted_values   # TODO: Lint for issues
+      # - id: ansible_role_find_unquoted_values

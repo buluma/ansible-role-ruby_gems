@@ -38,16 +38,18 @@ jobs:
         config:
           - image: "enterpriselinux"
             tag: "7"
+          - image: "enterpriselinux"
+            tag: "latest"
           - image: "docker-ubuntu-systemd"
             tag: "bionic"
-          - image: "docker-ubuntu1804-ansible"
-            tag: "latest"
           - image: "docker-ubuntu-systemd"
             tag: "focal"
-          - image: "docker-debian9-ansible"
+          - image: "docker-ubuntu-systemd"
             tag: "latest"
-          - image: "debian"
-            tag: "debian-9"
+          - image: "debian-systemd"
+            tag: "latest"
+          - image: "debian-systemd"
+            tag: "bookworm"
     steps:
       - name: checkout
         uses: actions/checkout@v3
