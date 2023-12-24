@@ -1,10 +1,10 @@
-# [Ansible role ruby_gems](#ruby_gems)
+# Ansible role [ruby_gems](https://galaxy.ansible.com/ui/standalone/roles/buluma/ruby_gems/documentation)
 
 Ruby Gems installation for Linux.
 
-|GitHub|Version|Issues|Pull Requests|
-|------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-ruby_gems/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-ruby_gems/actions/workflows/molecule.yml)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-ruby_gems.svg)](https://github.com/buluma/ansible-role-ruby_gems/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-ruby_gems.svg)](https://github.com/buluma/ansible-role-ruby_gems/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-ruby_gems.svg)](https://github.com/buluma/ansible-role-ruby_gems/pulls/)|
+|GitHub|Version|Issues|Pull Requests|Downloads|
+|------|-------|------|-------------|---------|
+|[![github](https://github.com/buluma/ansible-role-ruby_gems/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-ruby_gems/actions/workflows/molecule.yml)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-ruby_gems.svg)](https://github.com/buluma/ansible-role-ruby_gems/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-ruby_gems.svg)](https://github.com/buluma/ansible-role-ruby_gems/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-ruby_gems.svg)](https://github.com/buluma/ansible-role-ruby_gems/pulls/)|[![Ansible Role](https://img.shields.io/ansible/role/d/buluma/ruby_gems)](https://galaxy.ansible.com/ui/standalone/roles/buluma/ruby_gems/documentation)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -129,9 +129,7 @@ If you find issues, please register them in [GitHub](https://github.com/buluma/a
 
 ## [Author Information](#author-information)
 
-[buluma](https://buluma.github.io/)
+[Shadow Walker](https://buluma.github.io/)
 
-
-### [Special Thanks](#special-thanks)
 
 Template inspired by [Robert de Bock](https://github.com/robertdebock)
