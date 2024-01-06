@@ -10,7 +10,7 @@
       - sass
 
   pre_tasks:
-    - name: update apt cache.
+    - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
@@ -18,6 +18,6 @@
     - role: buluma.ruby_gems
 
   post_tasks:
-    - name: verify Ruby is installed.
+    - name: Verify Ruby is installed.
       command: ruby --version
       changed_when: false

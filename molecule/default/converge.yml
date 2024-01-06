@@ -10,17 +10,17 @@
     ruby_gems_bin_path: /root/.gem/ruby/bin
 
   pre_tasks:
-    - name: update apt cache.
+    - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
-    - name: add rubygems bin dir to system-wide $PATH.
+    - name: Add rubygems bin dir to system-wide $PATH.
       ansible.builtin.copy:
         dest: /etc/profile.d/ruby.sh
         content: 'PATH=$PATH:{{ ruby_gems_bin_path }}'
         mode: 0644
 
-    - name: don't install Bundler on CentOS 7 because of old Ruby version.
+    - name: Don't install Bundler on CentOS 7 because of old Ruby version.
       ansible.builtin.set_fact:
         ruby_install_bundler: false
       when:
@@ -32,6 +32,6 @@
     - role: buluma.ruby_gems
 
   post_tasks:
-    - name: verify Ruby is installed.
+    - name: Verify Ruby is installed.
       command: ruby --version
       changed_when: false
