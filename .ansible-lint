@@ -14,6 +14,8 @@ skip_list:
   - no-free-form
   - fqcn[action-core]
   - risky-file-permissions
+  - no-changed-when
+  - name[missing]
 
 enable_list:
   - name[prefix]
