@@ -14,7 +14,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 ---
 - name: Converge
   hosts: all
-  become: true
+  become: no
 
   vars:
     ruby_install_gems_user: root
@@ -23,17 +23,17 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
     ruby_gems_bin_path: /root/.gem/ruby/bin
 
   pre_tasks:
-    - name: update apt cache.
-      apt: update_cache=true cache_valid_time=600
+    - name: Update apt cache.
+      ansible.builtin.apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
-    - name: add rubygems bin dir to system-wide $PATH.
+    - name: Add rubygems bin dir to system-wide $PATH.
       ansible.builtin.copy:
         dest: /etc/profile.d/ruby.sh
         content: 'PATH=$PATH:{{ ruby_gems_bin_path }}'
         mode: 0644
 
-    - name: don't install Bundler on CentOS 7 because of old Ruby version.
+    - name: Don't install Bundler on CentOS 7 because of old Ruby version.
       ansible.builtin.set_fact:
         ruby_install_bundler: false
       when:
@@ -45,9 +45,22 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
     - role: buluma.ruby_gems
 
   post_tasks:
-    - name: verify Ruby is installed.
-      command: ruby --version
+    - name: Verify Ruby is installed.
+      ansible.builtin.command: ruby --version
       changed_when: false
+```
+
+The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-ruby_gems/blob/master/molecule/default/prepare.yml):
+
+```yaml
+---
+- name: Prepare
+  hosts: all
+  become: yes
+  gather_facts: no
+
+  roles:
+    - role: buluma.bootstrap
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
