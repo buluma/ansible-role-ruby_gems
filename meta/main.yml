@@ -1,29 +1,25 @@
----
 dependencies: []
-
 galaxy_info:
   role_name: ruby_gems
   author: buluma
   description: Ruby Gems installation for Linux.
   license: Apache-2.0
   company: ShadowNet
-  min_ansible_version: "2.4"
+  min_ansible_version: '2.4'
   platforms:
-    - name: EL
-      versions:
-        - all
-    - name: Ubuntu
-      versions:
-        - bionic
-        - focal
-        - jammy
-    - name: Debian
-      versions:
-        - all
+  - name: EL
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
   galaxy_tags:
-    - development
-    - web
-    - ruby
-    - rails
-    - gem
-    - bundler
+  - development
+  - web
+  - ruby
+  - rails
+  - gem
+  - bundler
