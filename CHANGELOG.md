@@ -7,6 +7,8 @@
 **Closed issues:**
 
 - Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#15](https://github.com/buluma/ansible-role-ruby_gems/issues/15)
+- Update action [\#14](https://github.com/buluma/ansible-role-ruby_gems/issues/14)
+- rebuild action [\#13](https://github.com/buluma/ansible-role-ruby_gems/issues/13)
 
 **Merged pull requests:**
 
