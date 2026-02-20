@@ -11,16 +11,16 @@ galaxy_info:
     - name: EL
       versions:
         - all
-  - name: Ubuntu
-    versions:
-    - all
-  - name: Debian
-    versions:
-    - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
   galaxy_tags:
     - development
-  - web
-  - ruby
-  - rails
-  - gem
-  - bundler
+    - web
+    - ruby
+    - rails
+    - gem
+    - bundler
