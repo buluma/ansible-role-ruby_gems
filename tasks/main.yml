@@ -1,42 +1,31 @@
----
-- name: Include OS-specific variables.
-  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
-
-- name: Define ruby_packages.
-  ansible.builtin.set_fact:
-    ruby_packages: "{{ __ruby_packages }}"
+- ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
+  name: Include OS-specific variables.
+- ansible.builtin.set_fact:
+    ruby_packages: '{{ __ruby_packages }}'
+  name: Define ruby_packages.
   when: ruby_packages is not defined
-
-# Include OS-specific installation tasks.
 - include_tasks: setup-RedHat.yml
   when:
-    - not ruby_install_from_source
-    - ansible_os_family == 'RedHat'
-
+  - not ruby_install_from_source
+  - ansible_os_family == 'RedHat'
 - include_tasks: setup-Debian.yml
   when:
-    - not ruby_install_from_source
-    - ansible_os_family == 'Debian'
-
-# Install ruby from source when ruby_install_from_source is true.
+  - not ruby_install_from_source
+  - ansible_os_family == 'Debian'
 - include_tasks: install-from-source.yml
   when: ruby_install_from_source
-
-- name: Add user installed RubyGems bin directory to global $PATH.
-  ansible.builtin.copy:
-    src: rubygems.sh
+- ansible.builtin.copy:
     dest: /etc/profile.d/rubygems.sh
-    mode: 0644
-
-# Install Bundler and configured gems.
-- name: Install Bundler.
-  community.general.gem: name=bundler state=present user_install=no
+    mode: 420
+    src: rubygems.sh
+  name: Add user installed RubyGems bin directory to global $PATH.
+- community.general.gem: name=bundler state=present user_install=no
+  name: Install Bundler.
   when: ruby_install_bundler
-
-- name: Install configured gems.
+- become: true
+  become_user: '{{ ruby_install_gems_user }}'
   community.general.gem:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
-  become: true
-  become_user: "{{ ruby_install_gems_user }}"
-  with_items: "{{ ruby_install_gems }}"
+  name: Install configured gems.
+  with_items: '{{ ruby_install_gems }}'
