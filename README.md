@@ -12,36 +12,36 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
 ```yaml
 ---
-  - become: true
-    hosts: all
-    name: Converge
-    post_tasks:
-      - changed_when: false
-        command: ruby --version
-        name: Verify Ruby is installed.
-    pre_tasks:
-      - apt: update_cache=true cache_valid_time=600
-        name: Update apt cache.
-        when: ansible_os_family == 'Debian'
-      - ansible.builtin.copy:
-          content: PATH=$PATH:{{ ruby_gems_bin_path }}
-          dest: /etc/profile.d/ruby.sh
-          mode: 420
-        name: Add rubygems bin dir to system-wide $PATH.
-      - ansible.builtin.set_fact:
-          ruby_install_bundler: false
-        name: Don't install Bundler on CentOS 7 because of old Ruby version.
-        when:
-          - ansible_os_family == 'RedHat'
-          - ansible_distribution_major_version == '7'
-    roles:
-      - role: buluma.bootstrap
-      - role: buluma.ruby_gems
-    vars:
-      ruby_gems_bin_path: /root/.gem/ruby/bin
-      ruby_install_gems:
-        - json
-      ruby_install_gems_user: root
+- become: true
+  hosts: all
+  name: Converge
+  post_tasks:
+  - changed_when: false
+    command: ruby --version
+    name: Verify Ruby is installed.
+  pre_tasks:
+  - apt: update_cache=true cache_valid_time=600
+    name: Update apt cache.
+    when: ansible_os_family == 'Debian'
+  - ansible.builtin.copy:
+      content: PATH=$PATH:{{ ruby_gems_bin_path }}
+      dest: /etc/profile.d/ruby.sh
+      mode: 420
+    name: Add rubygems bin dir to system-wide $PATH.
+  - ansible.builtin.set_fact:
+      ruby_install_bundler: false
+    name: Don't install Bundler on CentOS 7 because of old Ruby version.
+    when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version == '7'
+  roles:
+  - role: buluma.bootstrap
+  - role: buluma.ruby_gems
+  vars:
+    ruby_gems_bin_path: /root/.gem/ruby/bin
+    ruby_install_gems:
+    - json
+    ruby_install_gems_user: root
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.

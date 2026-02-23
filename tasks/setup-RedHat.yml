@@ -1,5 +1,5 @@
 ---
-  - ansible.builtin.yum:
-      name: '{{ ruby_packages }}'
-      state: present
-    name: setup-RedHat | Install ruby, rubygems, and development tools.
+- ansible.builtin.yum:
+    name: '{{ ruby_packages }}'
+    state: present
+  name: setup-RedHat | Install ruby, rubygems, and development tools.

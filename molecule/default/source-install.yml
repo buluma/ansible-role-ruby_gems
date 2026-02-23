@@ -1,19 +1,19 @@
 ---
-  - become: true
-    hosts: all
-    name: Converge
-    post_tasks:
-      - changed_when: false
-        command: ruby --version
-        name: Verify Ruby is installed.
-    pre_tasks:
-      - apt: update_cache=true cache_valid_time=600
-        name: Update apt cache.
-        when: ansible_os_family == 'Debian'
-    roles:
-      - role: buluma.ruby_gems
-    vars:
-      ruby_install_from_source: true
-      ruby_install_gems:
-        - sass
-      ruby_install_gems_user: root
+- become: true
+  hosts: all
+  name: Converge
+  post_tasks:
+  - changed_when: false
+    command: ruby --version
+    name: Verify Ruby is installed.
+  pre_tasks:
+  - apt: update_cache=true cache_valid_time=600
+    name: Update apt cache.
+    when: ansible_os_family == 'Debian'
+  roles:
+  - role: buluma.ruby_gems
+  vars:
+    ruby_install_from_source: true
+    ruby_install_gems:
+    - sass
+    ruby_install_gems_user: root

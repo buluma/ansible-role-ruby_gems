@@ -1,32 +1,32 @@
 ---
-  - ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
-    name: Include OS-specific variables.
-  - ansible.builtin.set_fact:
-      ruby_packages: '{{ __ruby_packages }}'
-    name: Define ruby_packages.
-    when: ruby_packages is not defined
-  - include_tasks: setup-RedHat.yml
-    when:
-      - not ruby_install_from_source
-      - ansible_os_family == 'RedHat'
-  - include_tasks: setup-Debian.yml
-    when:
-      - not ruby_install_from_source
-      - ansible_os_family == 'Debian'
-  - include_tasks: install-from-source.yml
-    when: ruby_install_from_source
-  - ansible.builtin.copy:
-      dest: /etc/profile.d/rubygems.sh
-      mode: 420
-      src: rubygems.sh
-    name: Add user installed RubyGems bin directory to global $PATH.
-  - community.general.gem: name=bundler state=present user_install=no
-    name: Install Bundler.
-    when: ruby_install_bundler
-  - become: true
-    become_user: '{{ ruby_install_gems_user }}'
-    community.general.gem:
-      name: '{{ item }}'
-      state: present
-    name: Install configured gems.
-    with_items: '{{ ruby_install_gems }}'
+- ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
+  name: Include OS-specific variables.
+- ansible.builtin.set_fact:
+    ruby_packages: '{{ __ruby_packages }}'
+  name: Define ruby_packages.
+  when: ruby_packages is not defined
+- include_tasks: setup-RedHat.yml
+  when:
+  - not ruby_install_from_source
+  - ansible_os_family == 'RedHat'
+- include_tasks: setup-Debian.yml
+  when:
+  - not ruby_install_from_source
+  - ansible_os_family == 'Debian'
+- include_tasks: install-from-source.yml
+  when: ruby_install_from_source
+- ansible.builtin.copy:
+    dest: /etc/profile.d/rubygems.sh
+    mode: 420
+    src: rubygems.sh
+  name: Add user installed RubyGems bin directory to global $PATH.
+- community.general.gem: name=bundler state=present user_install=no
+  name: Install Bundler.
+  when: ruby_install_bundler
+- become: true
+  become_user: '{{ ruby_install_gems_user }}'
+  community.general.gem:
+    name: '{{ item }}'
+    state: present
+  name: Install configured gems.
+  with_items: '{{ ruby_install_gems }}'
