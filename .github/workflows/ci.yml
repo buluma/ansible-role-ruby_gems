@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out the codebase.
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         path: buluma.ruby_gems
     - name: Set up Python 3.
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out the codebase.
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         path: buluma.ruby_gems
     - name: Set up Python 3.
