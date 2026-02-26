@@ -4,6 +4,12 @@
 
 [Full Changelog](https://github.com/buluma/ansible-role-ruby_gems/compare/1.0.3...HEAD)
 
+**Closed issues:**
+
+- Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#15](https://github.com/buluma/ansible-role-ruby_gems/issues/15)
+- Update action [\#14](https://github.com/buluma/ansible-role-ruby_gems/issues/14)
+- rebuild action [\#13](https://github.com/buluma/ansible-role-ruby_gems/issues/13)
+
 **Merged pull requests:**
 
 - Testing [\#4](https://github.com/buluma/ansible-role-ruby_gems/pull/4) ([buluma](https://github.com/buluma))
