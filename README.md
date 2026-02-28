@@ -26,7 +26,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   - ansible.builtin.copy:
       content: PATH=$PATH:{{ ruby_gems_bin_path }}
       dest: /etc/profile.d/ruby.sh
-      mode: 420
+      mode: "0644"
     name: Add rubygems bin dir to system-wide $PATH.
   - ansible.builtin.set_fact:
       ruby_install_bundler: false
@@ -107,3 +107,4 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 ## [Author Information](#author-information)
 
 [buluma](https://buluma.github.io/)
+

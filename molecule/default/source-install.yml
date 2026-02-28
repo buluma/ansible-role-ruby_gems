@@ -1,19 +1,19 @@
 ---
-- become: true
+- name: Converge
+  become: true
   hosts: all
-  name: Converge
   post_tasks:
-  - changed_when: false
-    command: ruby --version
-    name: Verify Ruby is installed.
+    - name: Verify Ruby is installed.
+      changed_when: false
+      ansible.builtin.command: ruby --version
   pre_tasks:
-  - apt: update_cache=true cache_valid_time=600
-    name: Update apt cache.
-    when: ansible_os_family == 'Debian'
+    - ansible.builtin.apt: update_cache=true cache_valid_time=600
+      name: Update apt cache.
+      when: ansible_os_family == 'Debian'
   roles:
-  - role: buluma.ruby_gems
+    - role: buluma.ruby_gems
   vars:
     ruby_install_from_source: true
     ruby_install_gems:
-    - sass
+      - sass
     ruby_install_gems_user: root
