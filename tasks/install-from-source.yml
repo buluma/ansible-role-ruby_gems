@@ -32,7 +32,7 @@
   - ansible.builtin.unarchive:
       copy: false
       dest: '{{ workspace }}/'
-      mode: 493
+      mode: "0755"
       src: '{{ workspace }}/ruby-{{ ruby_version }}.tar.gz'
     name: install-from-source | Extract ruby.
   - command: '{{ item }} chdir={{ workspace }}/ruby-{{ ruby_version }}
@@ -44,7 +44,7 @@
     - make
     - make install
   - ansible.builtin.file:
-      mode: 493
+      mode: "0755"
       path: /var/cache/ansible/ruby-{{ ruby_version }}.check
       state: touch
     name: install-from-source | Touch install-marker

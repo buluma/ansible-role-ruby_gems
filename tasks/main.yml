@@ -17,7 +17,7 @@
   when: ruby_install_from_source
 - ansible.builtin.copy:
     dest: /etc/profile.d/rubygems.sh
-    mode: 420
+    mode: "0644"
     src: rubygems.sh
   name: Add user installed RubyGems bin directory to global $PATH.
 - community.general.gem: name=bundler state=present user_install=no
