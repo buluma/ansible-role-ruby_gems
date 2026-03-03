@@ -12,35 +12,35 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
 ```yaml
 ---
-- become: true
+- name: Converge
+  become: true
   hosts: all
-  name: Converge
   post_tasks:
-  - changed_when: false
-    command: ruby --version
-    name: Verify Ruby is installed.
+    - name: Verify Ruby is installed.
+      changed_when: false
+      ansible.builtin.command: ruby --version
   pre_tasks:
-  - apt: update_cache=true cache_valid_time=600
-    name: Update apt cache.
-    when: ansible_os_family == 'Debian'
-  - ansible.builtin.copy:
-      content: PATH=$PATH:{{ ruby_gems_bin_path }}
-      dest: /etc/profile.d/ruby.sh
-      mode: "0644"
-    name: Add rubygems bin dir to system-wide $PATH.
-  - ansible.builtin.set_fact:
-      ruby_install_bundler: false
-    name: Don't install Bundler on CentOS 7 because of old Ruby version.
-    when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version == '7'
+    - ansible.builtin.apt: update_cache=true cache_valid_time=600
+      name: Update apt cache.
+      when: ansible_os_family == 'Debian'
+    - name: Add rubygems bin dir to system-wide $PATH.
+      ansible.builtin.copy:
+        content: PATH=$PATH:{{ ruby_gems_bin_path }}
+        dest: /etc/profile.d/ruby.sh
+        mode: "0644"
+    - name: Don't install Bundler on CentOS 7 because of old Ruby version.
+      ansible.builtin.set_fact:
+        ruby_install_bundler: false
+      when:
+        - ansible_os_family == 'RedHat'
+        - ansible_distribution_major_version == '7'
   roles:
-  - role: buluma.bootstrap
-  - role: buluma.ruby_gems
+    - role: buluma.bootstrap
+    - role: buluma.ruby_gems
   vars:
     ruby_gems_bin_path: /root/.gem/ruby/bin
     ruby_install_gems:
-    - json
+      - json
     ruby_install_gems_user: root
 ```
 
@@ -56,7 +56,7 @@ ruby_download_url: http://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.0.tar.gz
 ruby_install_bundler: true
 ruby_install_from_source: true
 ruby_install_gems: []
-ruby_install_gems_user: '{{ ansible_user }}'
+ruby_install_gems_user: "{{ ansible_user }}"
 ruby_rubygems_package_name: rubygems
 ruby_source_configure_command: ./configure --enable-shared
 ruby_version: 3.0.0
