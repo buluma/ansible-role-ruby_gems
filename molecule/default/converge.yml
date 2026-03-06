@@ -7,8 +7,10 @@
       changed_when: false
       ansible.builtin.command: ruby --version
   pre_tasks:
-    - ansible.builtin.apt: update_cache=true cache_valid_time=600
-      name: Update apt cache.
+    - name: Update apt cache.
+      ansible.builtin.apt:
+        update_cache: "true"
+        cache_valid_time: "600"
       when: ansible_os_family == 'Debian'
     - name: Add rubygems bin dir to system-wide $PATH.
       ansible.builtin.copy:

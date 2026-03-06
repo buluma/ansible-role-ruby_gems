@@ -3,13 +3,15 @@
   ansible.builtin.set_fact:
     ruby_build_packages: "{{ __ruby_build_packages }}"
   when: ruby_build_packages is not defined
-- ansible.builtin.dnf:
+- name: install-from-source | Install packages required to build ruby.
+  ansible.builtin.dnf:
     name: "{{ ruby_build_packages }}"
     state: present
-  name: install-from-source | Install packages required to build ruby.
   when: ansible_os_family == 'RedHat'
-- ansible.builtin.apt: update_cache=true cache_valid_time=86400
-  name: install-from-source | Update apt cache (Debian).
+- name: install-from-source | Update apt cache (Debian).
+  ansible.builtin.apt:
+    update_cache: "true"
+    cache_valid_time: "86400"
   when: ansible_os_family == 'Debian'
 - name: install-from-source | Install packages required to build ruby (Debian).
   ansible.builtin.apt:
@@ -37,8 +39,10 @@
         dest: "{{ workspace }}/"
         mode: "0755"
         src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
-    - ansible.builtin.command: "{{ item }} chdir={{ workspace }}/ruby-{{ ruby_version }}\n"
-      name: install-from-source | Build ruby.
+    - name: install-from-source | Build ruby.
+      ansible.builtin.command:
+        chdir: "{{ workspace }}/ruby-{{ ruby_version }}\n"
+        cmd: "{{ item }}"
       with_items:
         - "{{ ruby_source_configure_command }}"
         - make
@@ -48,12 +52,12 @@
         mode: "0755"
         path: /var/cache/ansible/ruby-{{ ruby_version }}.check
         state: touch
-- ansible.builtin.file:
+- name: install-from-source | Add ruby symlinks.
+  ansible.builtin.file:
     dest: /usr/bin/{{ item }}
     force: true
     src: /usr/local/bin/{{ item }}
     state: link
-  name: install-from-source | Add ruby symlinks.
   with_items:
     - erb
     - gem
