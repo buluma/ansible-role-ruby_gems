@@ -5,15 +5,18 @@
   ansible.builtin.set_fact:
     ruby_packages: "{{ __ruby_packages }}"
   when: ruby_packages is not defined
-- ansible.builtin.include_tasks: setup-RedHat.yml
+- name: Include RedHat setup tasks
+  ansible.builtin.include_tasks: setup-RedHat.yml
   when:
     - not ruby_install_from_source
     - ansible_os_family == 'RedHat'
-- ansible.builtin.include_tasks: setup-Debian.yml
+- name: Include Debian setup tasks
+  ansible.builtin.include_tasks: setup-Debian.yml
   when:
     - not ruby_install_from_source
     - ansible_os_family == 'Debian'
-- ansible.builtin.include_tasks: install-from-source.yml
+- name: Include source installation tasks
+  ansible.builtin.include_tasks: install-from-source.yml
   when: ruby_install_from_source
 - name: Add user installed RubyGems bin directory to global $PATH.
   ansible.builtin.copy:

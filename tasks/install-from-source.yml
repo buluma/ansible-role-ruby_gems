@@ -20,6 +20,7 @@
   when: ansible_os_family == 'Debian'
 - name: install-from-source | Ensure that /var/cache/ansible/ exists
   ansible.builtin.file:
+    mode: "0755"
     path: /var/cache/ansible/
     state: directory
 - name: install-from-source | Check if ruby is up-to-date
@@ -32,6 +33,7 @@
     - name: install-from-source | Download ruby.
       ansible.builtin.get_url:
         dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+        mode: "0644"
         url: "{{ ruby_download_url }}"
     - name: install-from-source | Extract ruby.
       ansible.builtin.unarchive:
@@ -41,8 +43,9 @@
         src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
     - name: install-from-source | Build ruby.
       ansible.builtin.command:
-        chdir: "{{ workspace }}/ruby-{{ ruby_version }}\n"
+        chdir: "{{ workspace }}/ruby-{{ ruby_version }}"
         cmd: "{{ item }}"
+      changed_when: true
       with_items:
         - "{{ ruby_source_configure_command }}"
         - make
