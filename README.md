@@ -54,14 +54,14 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 
 ```yaml
 ---
-ruby_download_url: http://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.0.tar.gz
+ruby_download_url: "http://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.0.tar.gz"
 ruby_install_bundler: true
 ruby_install_from_source: true
 ruby_install_gems: []
 ruby_install_gems_user: "{{ ansible_user }}"
 ruby_rubygems_package_name: rubygems
 ruby_source_configure_command: ./configure --enable-shared
-ruby_version: 3.0.0
+ruby_version: "3.0.0"
 workspace: /root
 ```
 
@@ -110,3 +110,4 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 ## [Author Information](#author-information)
 
 [buluma](https://buluma.github.io/)
+
