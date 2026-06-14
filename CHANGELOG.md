@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/buluma/ansible-role-ruby_gems/tree/HEAD)
+## [26.6.0](https://github.com/buluma/ansible-role-ruby_gems/tree/26.6.0) (2026-06-14)
 
-[Full Changelog](https://github.com/buluma/ansible-role-ruby_gems/compare/1.0.3...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-ruby_gems/compare/1.0.3...26.6.0)
 
 **Closed issues:**
 
@@ -12,6 +12,10 @@
 
 **Merged pull requests:**
 
+- Bump ansible/ansible-lint from 26.1.1 to 26.2.0 [\#19](https://github.com/buluma/ansible-role-ruby_gems/pull/19) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 4 to 6 [\#18](https://github.com/buluma/ansible-role-ruby_gems/pull/18) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/setup-python from 2 to 6 [\#17](https://github.com/buluma/ansible-role-ruby_gems/pull/17) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump buluma/molecule-action from 4.0.7 to 5.0.4 [\#11](https://github.com/buluma/ansible-role-ruby_gems/pull/11) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Testing [\#4](https://github.com/buluma/ansible-role-ruby_gems/pull/4) ([buluma](https://github.com/buluma))
 - Bump actions/checkout from 2 to 3 [\#3](https://github.com/buluma/ansible-role-ruby_gems/pull/3) ([dependabot[bot]](https://github.com/apps/dependabot))
 - develop [\#1](https://github.com/buluma/ansible-role-ruby_gems/pull/1) ([buluma](https://github.com/buluma))
