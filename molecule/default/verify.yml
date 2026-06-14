@@ -1,0 +1,11 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Check ruby version
+      ansible.builtin.command:
+        cmd: ruby --version
+      changed_when: false
