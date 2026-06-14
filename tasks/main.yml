@@ -1,6 +1,6 @@
 ---
 - name: Include OS-specific variables.
-  ansible.builtin.include_vars: "{{ ansible_facts.os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 - name: Define ruby_packages.
   ansible.builtin.set_fact:
     ruby_packages: "{{ __ruby_packages }}"
@@ -9,12 +9,12 @@
   ansible.builtin.include_tasks: setup-RedHat.yml
   when:
     - not ruby_install_from_source
-    - ansible_facts.os_family == 'RedHat'
+    - ansible_os_family == 'RedHat'
 - name: Include Debian setup tasks
   ansible.builtin.include_tasks: setup-Debian.yml
   when:
     - not ruby_install_from_source
-    - ansible_facts.os_family == 'Debian'
+    - ansible_os_family == 'Debian'
 - name: Include source installation tasks
   ansible.builtin.include_tasks: install-from-source.yml
   when: ruby_install_from_source

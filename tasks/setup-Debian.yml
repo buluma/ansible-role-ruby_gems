@@ -6,7 +6,7 @@
 - name: setup-Debian | Set rubygems package name for Ubuntu 14.04.
   ansible.builtin.set_fact:
     ruby_rubygems_package_name: rubygems-integration
-  when: ansible_facts.distribution == 'Ubuntu' and ansible_facts.distribution_release == 'trusty'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
 - name: setup-Debian | Install ruby and other required dependencies.
   ansible.builtin.apt:
     name: "{{ ruby_packages }}"
