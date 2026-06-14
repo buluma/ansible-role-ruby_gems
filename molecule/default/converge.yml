@@ -1,13 +1,23 @@
 ---
 - name: Converge
-  become: true
-- name: Converge
   hosts: all
   post_tasks:
     - name: Verify Ruby is installed.
       changed_when: false
       ansible.builtin.command: ruby --version
   pre_tasks:
+    - name: Install python3 and sudo
+      ansible.builtin.raw: |
+        if command -v dnf 2>/dev/null; then
+          dnf install -y python3 sudo
+        elif command -v apt-get 2>/dev/null; then
+          apt-get install -y python3 sudo
+        elif command -v apk 2>/dev/null; then
+          apk add python3 sudo
+        fi
+      become: false
+      changed_when: true
+
     - name: Find EXTERNALLY-MANAGED files
       ansible.builtin.find:
         paths: /usr/lib
