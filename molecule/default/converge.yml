@@ -1,6 +1,7 @@
 ---
 - name: Converge
   become: true
+- name: Converge
   hosts: all
   post_tasks:
     - name: Verify Ruby is installed.
