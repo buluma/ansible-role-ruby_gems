@@ -23,4 +23,10 @@ galaxy_info:
     - name: Debian
       versions:
         - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Suse
+      versions:
+        - all
   role_name: ruby_gems
