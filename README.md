@@ -13,18 +13,42 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 ```yaml
 ---
 - name: Converge
-  become: true
   hosts: all
   post_tasks:
     - name: Verify Ruby is installed.
       changed_when: false
       ansible.builtin.command: ruby --version
   pre_tasks:
+    - name: Install python3 and sudo
+      ansible.builtin.raw: |
+        if command -v dnf 2>/dev/null; then
+          dnf install -y python3 sudo
+        elif command -v apt-get 2>/dev/null; then
+          apt-get update -qq && apt-get install -y python3 sudo
+        elif command -v apk 2>/dev/null; then
+          apk update && apk add python3 sudo
+        fi
+      become: false
+      changed_when: true
+
+    - name: Find EXTERNALLY-MANAGED files
+      ansible.builtin.find:
+        paths: /usr/lib
+        patterns: "EXTERNALLY-MANAGED"
+        recurse: true
+      register: externally_managed_files
+
+    - name: Remove EXTERNALLY-MANAGED files
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ externally_managed_files.files }}"
+
     - name: Update apt cache.
       ansible.builtin.apt:
         update_cache: "true"
         cache_valid_time: "600"
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts['os_family'] == 'Debian'
     - name: Add rubygems bin dir to system-wide $PATH.
       ansible.builtin.copy:
         content: PATH=$PATH:{{ ruby_gems_bin_path }}
@@ -34,8 +58,8 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       ansible.builtin.set_fact:
         ruby_install_bundler: false
       when:
-        - ansible_os_family == 'RedHat'
-        - ansible_distribution_major_version == '7'
+        - ansible_facts['os_family'] == 'RedHat'
+        - ansible_facts['distribution_major_version'] == '7'
   roles:
     - role: buluma.bootstrap
     - role: buluma.ruby_gems
@@ -87,15 +111,16 @@ Here is an overview of related roles:
 
 ## [Compatibility](#compatibility)
 
-This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
+This role has been tested on these [container images](https://hub.docker.com/u/buluma):
 
 |container|tags|
 |---------|----|
-|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|all|
-|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
-|[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
+|[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Fedora](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Ubuntu](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 
-The minimum version of Ansible required is 2.4, tests have been done on:
+The minimum version of Ansible required is 2.12, tests have been done on:
 
 - The previous version.
 - The current version.
@@ -111,6 +136,3 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 
 [buluma](https://buluma.github.io/)
 
-### Get Help
-- Report issues: https://github.com/buluma/ansible-role-ruby_gems/issues/new
-- See docs: https://docs.ansible.com/collection/gallery/ansible-role-ruby_gems
