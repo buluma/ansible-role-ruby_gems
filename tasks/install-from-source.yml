@@ -3,6 +3,14 @@
   ansible.builtin.set_fact:
     ruby_build_packages: "{{ __ruby_build_packages }}"
   when: ruby_build_packages is not defined
+- name: install-from-source | Ensure dnf-plugins-core is installed (provides config-manager on dnf4).
+  ansible.builtin.dnf:
+    name: dnf-plugins-core
+    state: present
+  failed_when: false
+  when:
+    - ansible_facts['os_family'] == 'RedHat'
+    - ansible_facts['distribution'] != 'Fedora'
 - name: install-from-source | Enable CodeReady Builder/PowerTools (EL only, provides libyaml-devel, gdbm-devel, etc.)
   ansible.builtin.command: >-
     dnf config-manager --set-enabled
