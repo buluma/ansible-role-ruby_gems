@@ -17,7 +17,7 @@
           apk update && apk add python3 sudo
         fi
       become: false
-      changed_when: true
+      changed_when: false
 
     - name: Gather facts now that python3 is available
       ansible.builtin.setup:
