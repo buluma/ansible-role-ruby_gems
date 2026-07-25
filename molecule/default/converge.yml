@@ -1,6 +1,7 @@
 ---
 - name: Converge
   hosts: all
+  gather_facts: false
   post_tasks:
     - name: Verify Ruby is installed.
       changed_when: false
@@ -17,6 +18,9 @@
         fi
       become: false
       changed_when: true
+
+    - name: Gather facts now that python3 is available
+      ansible.builtin.setup:
 
     - name: Find EXTERNALLY-MANAGED files
       ansible.builtin.find:
